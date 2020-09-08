@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+    .pulse-img {
+        margin-top: 20px;
+        width: 95%;
+        height: 350px;
+    }
+    .login-block{
+        margin-top: 75px;
+    }
+    .text {
+        color: #869099;
+        font-family: cursive;
+        margin-top: 16px;
+    }
+</style>
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h1>
+                        <span class="letters">Welcome to Healthify!!</span>
+                </h1>
+                <div class="text">Here you have to upload the x-ray image and verify if you are prone to pnuemonia or not. Before uploading you just need to login. If you are a new user, please register.</div>
+                <div>
+                    <img class="pulse-img" src="{{ url_for('static', filename='pulse.gif')}}" />
+                </div>
+            </div>
+            <div class="col-md-4 login-block">
+                <div class="content-section">
+                    <form method="POST" action="">
+                        {{ form.hidden_tag() }}
+                        <fieldset class="form-group">
+                            <legend class="border-bottom mb-4">Log In</legend>
+                            <div class="form-group">
+                                {{ form.username.label(class="form-control-label") }}
+                                {% if form.username.errors %}
+                                {{ form.username(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.username.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{ form.username(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{ form.password.label(class="form-control-label") }}
+                                {% if form.password.errors %}
+                                {{ form.password(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.password.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{ form.password(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+                            <div class="form-check">
+                                {{ form.remember(class="form-check-input") }}
+                                {{ form.remember.label(class="form-check-label") }}
+                            </div>
+                        </fieldset>
+                        <div class="form-group text-center">
+                            {{ form.submit(class="btn btn-outline-info") }}
+                        </div>
+                        <small class="text-muted ml-2 text-center">
+                            <a href="#">Forgot Password?</a>
+                        </small>
+                    </form>
+                </div>
+                <div class="border-top text-center">
+                    <small class="text-muted">
+                        Need An Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up Now</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock content %}

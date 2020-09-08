@@ -1,0 +1,102 @@
+﻿{% extends "layout.html" %}
+{% block content %}
+<script>
+    function showloading() {
+        image = document.getElementById('loading_image');
+        image.style.display = 'inline'
+    }
+</script>
+
+<style>
+    .down-design {
+        padding: 20px;
+        margin-top: 20px;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+    }
+    .flip-box {
+        background-color: transparent;
+        width: auto;
+        height: 220px;
+        perspective: 1000px; /* Remove this if you don't want the 3D effect */
+    }
+
+    /* This container is needed to position the front and back side */
+    .flip-box-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+    }
+
+    /* Do an horizontal flip when you move the mouse over the flip box container */
+    .flip-box:hover .flip-box-inner {
+        transform: rotateY(180deg);
+    }
+
+    /* Position the front and back side */
+    .flip-box-front, .flip-box-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden; /* Safari */
+        backface-visibility: hidden;
+    }
+
+    /* Style the front side (fallback if image is missing) */
+
+    /* Style the back side */
+    .flip-box-back {
+        transform: rotateY(180deg);
+    }
+    .flip-box-inner img {
+        height: 200px;
+        width: 400px;
+    }
+    .arrow {
+        height: 30px;
+        width: 50px;
+    }
+</style>
+
+<body>
+    <div class="container text-center">
+        <h4>Hi {{form.username.data}}!!</h4>
+        <p class="text-muted">Please upload your x-ray...</p>
+        <div class="flip-box">
+            <div class="flip-box-inner">
+                <div class="flip-box-front">
+                    <img src="{{ url_for('static', filename='lungs.jpg') }}" />
+                </div>
+                <div class="flip-box-back">
+                    <img src="{{ url_for('static', filename='health.jpg') }}" />
+                </div>
+            </div>
+        </div>
+        <div>
+            
+        </div>
+
+        <form action="/upload11" method="post" enctype="multipart/form-data" onsubmit="showloading()">
+            <div class="btn">
+                Select Image <img class="arrow" src="{{ url_for('static', filename='arrow.png')}}"> <input type="file" name="image">
+            </div>
+            <br><br>
+            <input type="submit" value="Upload" class="btn btn-primary">
+        </form>
+        <div class="center">
+            <img id="loading_image"  style="display:none" src="{{ url_for('static', filename='loading.gif')}}">
+        </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </div>
+    <footer class="bg-steel down-design">
+    </footer>
+</body>
+{% endblock content %}

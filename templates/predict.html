@@ -1,0 +1,32 @@
+﻿{% extends "layout.html" %}
+{% block content %}
+<style>
+    .down-design {
+        padding: 20px;
+        margin-top: 20px;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+    }
+    .label {
+        color: #19b33c;
+        font-size: 18px;
+    }
+</style>
+    <body class="text-center">
+        <h4>Pneumonia X-Ray Classification</h4>
+        <div>
+            <img src="{{ url_for('send_file', filename=image_file_name)}}" style="max-width: 500px; max-height: 450px; margin-top: 30px; margin-bottom: 10px">
+            <p style="font-style: italic">{{ image_file_name }}</p>
+            <div class="label">{{ label }}</div>
+            <div>Accuracy : {{ accuracy }} %</div>
+        </div>
+        <footer class="bg-steel down-design">
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+{% endblock content %}
